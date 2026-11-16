@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 
-const WORDS = "The finest homes in the Illawarra and South Coast, represented with the expertise, discretion and market knowledge they deserve. We work with a select number of clients at any one time — giving every property the attention, strategy and presence it demands. Because at this level, the difference between good and exceptional is everything.".split(" ");
+const WORDS = "Connecting discerning buyers and sellers across global markets. Spinelli International brings boutique expertise, cultural fluency and deep local knowledge to every cross-border transaction — from Sydney's prestige coast to the world's most sought-after addresses. Because exceptional property deserves exceptional representation, wherever it stands.".split(" ");
 
 export default function ScrollStatement() {
   const ref = useRef<HTMLParagraphElement>(null);

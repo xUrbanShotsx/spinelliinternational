@@ -35,7 +35,7 @@ export default function HomePage() {
           <PropertyCard
             image="https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=800&q=80"
             address="14 Cliff Drive, Thirroul"
-            suburb="Thirroul"
+            suburb="NSW, Australia"
             price="$4,200,000"
             beds={5}
             baths={4}
@@ -43,20 +43,20 @@ export default function HomePage() {
           />
           <PropertyCard
             image="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&q=80"
-            address="8 Marine Parade, Kiama"
-            suburb="Kiama"
-            price="$3,850,000"
-            beds={4}
-            baths={3}
+            address="Côte d'Azur Villa"
+            suburb="Nice, France"
+            price="€6,500,000"
+            beds={6}
+            baths={5}
             delay={80}
           />
           <PropertyCard
             image="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&q=80"
-            address="22 Lawrence Hargrave Drive, Scarborough"
-            suburb="Scarborough"
-            price="$5,100,000"
-            beds={6}
-            baths={5}
+            address="Palm Jumeirah Residence"
+            suburb="Dubai, UAE"
+            price="AED 18,000,000"
+            beds={5}
+            baths={6}
             delay={160}
           />
         </div>
@@ -68,7 +68,7 @@ export default function HomePage() {
       {/* MARQUEE */}
       <section className="marquee dark" aria-hidden="true">
         <div className="marquee__track">
-          {["Illawarra", "Prestige", "South Coast", "Off-Market", "Illawarra", "Prestige", "South Coast", "Off-Market"].map((w, i) => (
+          {["International", "Global Markets", "Cross-Border", "Off-Market", "International", "Global Markets", "Cross-Border", "Off-Market"].map((w, i) => (
             <span key={i}>{w}<i>✱</i></span>
           ))}
         </div>
@@ -77,13 +77,13 @@ export default function HomePage() {
       {/* CTA */}
       <section className="section cta light">
         <div className="wrap">
-          <Reveal as="p" className="eyebrow">Work with us</Reveal>
+          <Reveal as="p" className="eyebrow">Work with us globally</Reveal>
           <Reveal as="h2" className="cta__title">
-            Thinking of<br />selling?
+            Selling to<br />the world?
           </Reveal>
           <Reveal>
             <Link href="/contact" className="btn btn--dark">
-              Get in touch <span aria-hidden="true">→</span>
+              Start a conversation <span aria-hidden="true">→</span>
             </Link>
           </Reveal>
         </div>

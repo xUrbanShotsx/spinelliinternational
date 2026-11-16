@@ -106,7 +106,7 @@ export default function HeroChat() {
         pointerEvents: "none",
         transition: `opacity 0.7s ${EASE}, transform 0.7s ${EASE}`,
       }}>
-        Prestige Property Specialist
+        Global Property, Local Expertise.
       </p>
 
       {/* BAR + CHAT — fades in as tagline fades out */}
@@ -155,7 +155,7 @@ export default function HeroChat() {
             </div>
             <div>
               <p style={{ fontWeight: 700, fontSize: 14, letterSpacing: "-0.01em", color: "#000", margin: 0 }}>Spinelli AI</p>
-              <p style={{ fontSize: 11, color: "rgba(0,0,0,0.4)", fontFamily: "var(--font-mono)", margin: 0 }}>Prestige Property Specialist</p>
+              <p style={{ fontSize: 11, color: "rgba(0,0,0,0.4)", fontFamily: "var(--font-mono)", margin: 0 }}>International Property Specialist</p>
             </div>
           </div>
           <button
