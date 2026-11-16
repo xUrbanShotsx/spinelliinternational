@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const links = [
-  { href: "/listings", label: "Listings" },
+  { href: "/projects", label: "Projects" },
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
 ];
@@ -22,14 +22,24 @@ export default function Header() {
   }, [open]);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > window.innerHeight * 0.85);
+    const onScroll = () => setScrolled(window.scrollY > 60);
     window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  const isProjects = pathname.startsWith("/projects");
+  const showWhiteBg = isProjects && scrolled;
+  const headerColor = showWhiteBg ? "#0a0a08" : scrolled ? "#d4bb7b" : "#fff";
+
   return (
     <>
-      <header className="header" style={{ color: scrolled ? "#d4bb7b" : "#fff", transition: "color 0.4s cubic-bezier(0.22,1,0.36,1)" }}>
+      <header className="header" style={{
+        color: headerColor,
+        background: showWhiteBg ? "#fff" : "transparent",
+        boxShadow: showWhiteBg ? "0 1px 0 rgba(0,0,0,0.08)" : "none",
+        transition: "color 0.4s cubic-bezier(0.22,1,0.36,1), background 0.4s cubic-bezier(0.22,1,0.36,1), box-shadow 0.4s cubic-bezier(0.22,1,0.36,1)",
+      }}>
         <Link href="/" className="header__logo" aria-label="Spinelli Prestige home">
           <Image
             src="/logo.webp"
