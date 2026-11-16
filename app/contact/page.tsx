@@ -19,7 +19,7 @@ export default function ContactPage() {
         <div className="wrap">
           <div className="contact">
             <div className="contact__info">
-              <Reveal><p className="eyebrow">Address</p><p>16 College Avenue<br />Shellharbour City Centre<br />NSW 2529</p></Reveal>
+              <Reveal><p className="eyebrow">Base</p><p>Australia &amp; Dubai<br />Globally connected</p></Reveal>
               <Reveal delay={60}><p className="eyebrow">Phone</p><p><a href="tel:0242960047">02 4296 0047</a></p></Reveal>
               <Reveal delay={120}><p className="eyebrow">Email</p><p><a href="mailto:prestige@spinellire.com">prestige@spinellire.com</a></p></Reveal>
               <Reveal delay={180}><p className="eyebrow">Hours</p><p>Mon – Fri · 8:30am – 5:30pm<br />Saturday · 9:00am – 4:00pm</p></Reveal>

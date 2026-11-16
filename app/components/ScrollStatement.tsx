@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 
-const WORDS = "Connecting discerning buyers and sellers across global markets. Spinelli International brings boutique expertise, cultural fluency and deep local knowledge to every cross-border transaction — from Sydney's prestige coast to the world's most sought-after addresses. Because exceptional property deserves exceptional representation, wherever it stands.".split(" ");
+const WORDS = "Spinelli International connects Australian buyers with the world's most compelling developments — with Dubai at the centre. Off-plan opportunities, branded residences and landmark towers, presented with the care and counsel that only a trusted boutique agency can offer. We handle everything so you can invest with confidence.".split(" ");
 
 export default function ScrollStatement() {
   const ref = useRef<HTMLParagraphElement>(null);

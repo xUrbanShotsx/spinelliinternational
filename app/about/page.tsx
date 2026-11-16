@@ -73,7 +73,7 @@ export default function AboutPage() {
       <section className="section light">
         <div className="wrap statement">
           <Reveal as="p" className="statement__text">
-            Spinelli International is the dedicated prestige arm of Spinelli Real Estate — the Illawarra&apos;s most trusted boutique agency. Two decades of local expertise. An active buyer network. An unwavering commitment to exceptional results.
+            Spinelli International is the global division of Spinelli Real Estate — connecting Australian buyers with Dubai&apos;s most compelling developments. Two decades of expertise. A trusted network. An unwavering commitment to exceptional results.
           </Reveal>
         </div>
       </section>
@@ -88,7 +88,7 @@ export default function AboutPage() {
         }}>
           {/* LEFT — text column */}
           <div style={{ paddingRight: "clamp(0px,2vw,40px)" }}>
-            <Reveal as="p" className="eyebrow" style={{ marginBottom: 32 }}>The Illawarra difference</Reveal>
+            <Reveal as="p" className="eyebrow" style={{ marginBottom: 32 }}>The Dubai opportunity</Reveal>
             <Reveal as="h2" delay={60} style={{
               fontSize: "clamp(36px,5vw,80px)",
               fontWeight: 700,
@@ -97,7 +97,7 @@ export default function AboutPage() {
               marginBottom: 32,
               color: "#1a1208",
             }}>
-              Local.<br />Trusted.<br />Discreet.
+              Global.<br />Trusted.<br />Discreet.
             </Reveal>
             <Reveal delay={120} as="p" style={{ opacity: 0.6, lineHeight: 1.7, maxWidth: 380 }}>
               We work with a carefully selected number of clients — which means every home receives the time, strategy and attention it deserves. No shortcuts. No compromises.
@@ -171,7 +171,7 @@ export default function AboutPage() {
           <Reveal delay={80} style={{ gridColumn: "2", display: "flex", flexDirection: "column", gap: 12, paddingTop: 24 }}>
             <p style={{ fontFamily: "var(--font-mono), monospace", fontSize: 11, letterSpacing: "0.1em", textTransform: "uppercase", opacity: 0.5 }}>Est. 2004</p>
             <p style={{ fontSize: "clamp(16px,1.4vw,20px)", lineHeight: 1.6, opacity: 0.75, maxWidth: 420 }}>
-              Twenty years of building relationships, understanding the market, and delivering outcomes that exceed expectations. The Illawarra is our home — and we know it like no one else.
+              Twenty years of building relationships and delivering outcomes that exceed expectations. Dubai is our focus — and we know its market like no one else.
             </p>
           </Reveal>
 
@@ -195,10 +195,10 @@ export default function AboutPage() {
         <div className="wrap">
           <div className="values">
             {[
-              ["Local expertise", "Deep knowledge of the Illawarra and South Coast prestige market — from Thirroul to Kiama and everywhere between."],
-              ["Qualified buyers", "A curated database of prestige buyers actively looking in the region — many deals happen before they go to market."],
-              ["Discreet service", "We understand the need for privacy. Off-market campaigns and confidential marketing available on request."],
-              ["End-to-end", "From styling advice and photography to negotiation and settlement — one team, every step of the way."],
+              ["Dubai expertise", "Deep knowledge of Dubai's off-plan and ready property market — from Downtown and Marina to Palm Jumeirah and emerging precincts."],
+              ["Trusted developers", "Direct relationships with Dubai's leading developers — giving our clients early access to the best projects before public release."],
+              ["Discreet service", "We understand the need for privacy. Off-market opportunities and confidential introductions available on request."],
+              ["End-to-end", "From project selection and due diligence to purchase, finance and handover — one team, every step of the way."],
             ].map(([t, d], i) => (
               <Reveal key={t as string} delay={i * 60} className="values__item">
                 <h3>{t}</h3>

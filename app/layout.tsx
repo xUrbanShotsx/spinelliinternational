@@ -10,7 +10,7 @@ const mono = Geist_Mono({ variable: "--font-mono", subsets: ["latin"] });
 export const metadata: Metadata = {
   metadataBase: new URL("https://international.spinellirealestate.com.au"),
   title: { default: "Spinelli International", template: "%s — Spinelli International" },
-  description: "Spinelli International — premium real estate for discerning buyers and sellers globally, with Illawarra expertise.",
+  description: "Spinelli International — connecting Australian buyers with premium Dubai developments and global prestige property.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

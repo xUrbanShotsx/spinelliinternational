@@ -6,11 +6,10 @@ export default function Footer() {
     <footer className="footer dark">
       <div className="wrap footer__grid">
         <div>
-          <p className="eyebrow">Studio</p>
+          <p className="eyebrow">Base</p>
           <p>
-            16 College Avenue<br />
-            Shellharbour City Centre<br />
-            NSW 2529, Australia
+            Australia &amp; Dubai<br />
+            Globally connected
           </p>
         </div>
         <div>
@@ -24,7 +23,7 @@ export default function Footer() {
         <div>
           <p className="eyebrow">Explore</p>
           <p>
-            <Link href="/">Listings</Link>
+            <Link href="/projects">Projects</Link>
             <br />
             <Link href="/about">About</Link>
             <br />
