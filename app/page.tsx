@@ -3,6 +3,7 @@ import Reveal from "./components/Reveal";
 import HeroVideo from "./components/HeroVideo";
 import ScrollStatement from "./components/ScrollStatement";
 import ProcessSection from "./components/ProcessSection";
+import WhyDubaiSection from "./components/WhyDubaiSection";
 
 export default function HomePage() {
   return (
@@ -40,6 +41,9 @@ export default function HomePage() {
 
       {/* PROCESS */}
       <ProcessSection />
+
+      {/* WHY DUBAI */}
+      <WhyDubaiSection />
 
       {/* MARQUEE */}
       <section className="marquee dark" aria-hidden="true">
