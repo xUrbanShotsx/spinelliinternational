@@ -7,12 +7,13 @@ const EASE = "cubic-bezier(0.22,1,0.36,1)";
 
 type Frame = {
   src: string;
+  image?: string;
   logo?: string;
   label?: string;
 };
 
 const FRAMES: Frame[] = [
-  { src: "/frame1.mp4", logo: "/chelsea-logo.png" },
+  { src: "/frame1.mp4", image: "/chelsea-bg.jpg", logo: "/chelsea-logo.png" },
   { src: "/frame2.mp4", label: "Frame 2" },
   { src: "/frame3.mp4", label: "Frame 3" },
 ];
@@ -38,7 +39,23 @@ function VideoFrame({ frame }: { frame: Frame }) {
       onMouseLeave={onLeave}
       style={{ position: "relative", height: "100%", overflow: "hidden", cursor: "pointer" }}
     >
-      {/* Video */}
+      {/* Static image (greyscale default, hidden on hover) */}
+      {frame.image && (
+        <Image
+          src={frame.image}
+          alt=""
+          fill
+          sizes="33vw"
+          style={{
+            objectFit: "cover",
+            filter: "grayscale(1)",
+            opacity: hovered ? 0 : 1,
+            transition: `opacity 0.7s ${EASE}`,
+          }}
+        />
+      )}
+
+      {/* Video (hidden until hover) */}
       <video
         ref={videoRef}
         muted
@@ -48,21 +65,24 @@ function VideoFrame({ frame }: { frame: Frame }) {
           position: "absolute", inset: 0,
           width: "100%", height: "100%",
           objectFit: "cover",
-          filter: hovered ? "grayscale(0)" : "grayscale(1)",
-          transition: `filter 0.7s ${EASE}`,
+          filter: frame.image ? "grayscale(0)" : hovered ? "grayscale(0)" : "grayscale(1)",
+          opacity: frame.image ? (hovered ? 1 : 0) : 1,
+          transition: `opacity 0.7s ${EASE}, filter 0.7s ${EASE}`,
         }}
       >
         <source src={frame.src} type="video/mp4" />
       </video>
 
       {/* Dark overlay */}
-      <div style={{
-        position: "absolute", inset: 0,
-        background: "rgba(0,0,0,0.25)",
-        opacity: hovered ? 0 : 1,
-        transition: `opacity 0.7s ${EASE}`,
-        pointerEvents: "none",
-      }} />
+      {!frame.image && (
+        <div style={{
+          position: "absolute", inset: 0,
+          background: "rgba(0,0,0,0.25)",
+          opacity: hovered ? 0 : 1,
+          transition: `opacity 0.7s ${EASE}`,
+          pointerEvents: "none",
+        }} />
+      )}
 
       {/* Logo (centred) */}
       {frame.logo && (
@@ -73,19 +93,18 @@ function VideoFrame({ frame }: { frame: Frame }) {
           transform: hovered ? "scale(0.95)" : "scale(1)",
           transition: `opacity 0.5s ${EASE}, transform 0.5s ${EASE}`,
           pointerEvents: "none",
-          padding: "clamp(24px,4vw,48px)",
         }}>
           <Image
             src={frame.logo}
             alt="Chelsea Residences by DAMAC"
-            width={260}
-            height={160}
-            style={{ width: "clamp(140px,16vw,260px)", height: "auto", objectFit: "contain" }}
+            width={320}
+            height={200}
+            style={{ width: "clamp(180px,22vw,320px)", height: "auto", objectFit: "contain" }}
           />
         </div>
       )}
 
-      {/* Text label (bottom-left) */}
+      {/* Text label */}
       {frame.label && (
         <div style={{
           position: "absolute", inset: 0,
