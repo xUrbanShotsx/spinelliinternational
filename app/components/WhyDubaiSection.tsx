@@ -16,7 +16,7 @@ const CARDS = [
     title: "Tax Free\nEnvironment",
     body: "The UAE offers zero income, capital gains, and wealth tax, maximising returns for investors.",
     image: "https://images.unsplash.com/photo-1582672060674-bc2bd808a8b5?w=900&q=80",
-    alt: "Dubai architecture",
+    alt: "Dubai DIFC architecture",
   },
   {
     title: "UAE Golden\nVisa Benefits",
@@ -26,21 +26,33 @@ const CARDS = [
   },
   {
     title: "Premium\nHealthcare",
-    body: "With strong healthcare investments, Dubai supports your health and wellbeing at the highest standard.",
+    body: "With strong healthcare investments, the city is ideal for supporting your health and wellbeing.",
     image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=900&q=80",
     alt: "Premium healthcare",
   },
   {
-    title: "World-Class\nInfrastructure",
-    body: "From airports to smart transport, Dubai's infrastructure leads the world in connectivity and innovation.",
-    image: "https://images.unsplash.com/photo-1538964173425-93a69a2a6f5c?w=900&q=80",
-    alt: "Dubai infrastructure",
+    title: "World Class\nEducation",
+    body: "Dubai offers top-tier schools and universities with globally recognised curricula, ideal for families and expatriates.",
+    image: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=900&q=80",
+    alt: "World class education",
   },
   {
-    title: "Strategic\nLocation",
-    body: "Positioned between East and West, Dubai offers unmatched access to global markets and time zones.",
-    image: "https://images.unsplash.com/photo-1534430480872-3498386e7856?w=900&q=80",
-    alt: "Dubai global hub",
+    title: "Entertainment\nHub",
+    body: "From iconic landmarks to theme parks and cultural events, Dubai is a world-class entertainment destination.",
+    image: "https://images.unsplash.com/photo-1536183922588-166604504d5e?w=900&q=80",
+    alt: "Dubai entertainment",
+  },
+  {
+    title: "Communal\nSafety",
+    body: "The UAE ranks among the world's safest nations, with a well-developed, effective law enforcement system.",
+    image: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=900&q=80",
+    alt: "Safe community family",
+  },
+  {
+    title: "Touristic\nAppeal",
+    body: "Dubai's iconic landmarks, luxury shopping, and vibrant culture make it a top global tourist destination.",
+    image: "https://images.unsplash.com/photo-1533395427226-788cee21cc9e?w=900&q=80",
+    alt: "Dubai Burj Al Arab tourism",
   },
 ];
 
