@@ -2,7 +2,6 @@ import Link from "next/link";
 import Reveal from "./components/Reveal";
 import HeroVideo from "./components/HeroVideo";
 import ScrollStatement from "./components/ScrollStatement";
-import PropertyCard from "./components/PropertyCard";
 import ProcessSection from "./components/ProcessSection";
 
 export default function HomePage() {
@@ -22,42 +21,21 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* PROPERTY CARDS */}
-      <section style={{ background: "#d4bb7b", padding: "clamp(60px,8vw,120px) 0 clamp(80px,14vw,200px)" }}>
-        <div className="feature-cards" style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(3, 1fr)",
-          gap: "clamp(12px,2vw,24px)",
-          padding: "0 clamp(20px,4vw,56px) clamp(20px,4vw,56px)",
-        }}>
-          <PropertyCard
-            image="https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=800&q=80"
-            address="14 Cliff Drive, Thirroul"
-            suburb="NSW, Australia"
-            price="$4,200,000"
-            beds={5}
-            baths={4}
-            delay={0}
-          />
-          <PropertyCard
-            image="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&q=80"
-            address="Côte d'Azur Villa"
-            suburb="Nice, France"
-            price="€6,500,000"
-            beds={6}
-            baths={5}
-            delay={80}
-          />
-          <PropertyCard
-            image="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&q=80"
-            address="Palm Jumeirah Residence"
-            suburb="Dubai, UAE"
-            price="AED 18,000,000"
-            beds={5}
-            baths={6}
-            delay={160}
-          />
-        </div>
+      {/* PROMO VIDEO */}
+      <section style={{ background: "#d4bb7b", padding: "clamp(48px,7vw,100px)" }}>
+        <Reveal>
+          <div style={{ position: "relative", width: "100%", aspectRatio: "16 / 9", overflow: "hidden" }}>
+            <video
+              autoPlay
+              muted
+              loop
+              playsInline
+              style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }}
+            >
+              <source src="/promo.mp4" type="video/mp4" />
+            </video>
+          </div>
+        </Reveal>
       </section>
 
       {/* PROCESS */}
