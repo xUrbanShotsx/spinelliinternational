@@ -1,20 +1,6 @@
-import Image from "next/image";
 import Reveal from "./Reveal";
 
-const FRAMES = [
-  {
-    src: "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=1200&q=85",
-    alt: "Dubai skyline",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=1200&q=85",
-    alt: "Dubai luxury residence",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1534430480872-3498386e7856?w=1200&q=85",
-    alt: "Dubai waterfront",
-  },
-];
+const FRAMES = ["/frame1.mp4", "/frame2.mp4", "/frame3.mp4"];
 
 export default function ProcessSection() {
   return (
@@ -32,15 +18,17 @@ export default function ProcessSection() {
         gridTemplateColumns: "repeat(3, 1fr)",
         gap: "clamp(40px,5vw,72px)",
       }}>
-        {FRAMES.map((f, i) => (
-          <Reveal key={f.alt} delay={i * 80} style={{ position: "relative", overflow: "hidden", height: "100%" }}>
-            <Image
-              src={f.src}
-              alt={f.alt}
-              fill
-              sizes="(max-width: 768px) 100vw, 33vw"
-              style={{ objectFit: "cover" }}
-            />
+        {FRAMES.map((src, i) => (
+          <Reveal key={src} delay={i * 80} style={{ position: "relative", overflow: "hidden", height: "100%" }}>
+            <video
+              autoPlay
+              muted
+              loop
+              playsInline
+              style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }}
+            >
+              <source src={src} type="video/mp4" />
+            </video>
           </Reveal>
         ))}
       </div>
