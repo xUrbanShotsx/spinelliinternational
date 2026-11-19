@@ -14,6 +14,7 @@ const links = [
 export default function Header() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [hidden, setHidden] = useState(false);
   const pathname = usePathname();
 
   useEffect(() => {
@@ -22,7 +23,14 @@ export default function Header() {
   }, [open]);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 60);
+    let last = window.scrollY;
+    const onScroll = () => {
+      const y = window.scrollY;
+      setScrolled(y > 60);
+      if (y > last && y > 80) setHidden(true);   // scrolling down
+      else if (y < last) setHidden(false);         // scrolling up
+      last = y;
+    };
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
     return () => window.removeEventListener("scroll", onScroll);
@@ -38,7 +46,8 @@ export default function Header() {
         color: headerColor,
         background: showWhiteBg ? "#fff" : "transparent",
         boxShadow: showWhiteBg ? "0 1px 0 rgba(0,0,0,0.08)" : "none",
-        transition: "color 0.4s cubic-bezier(0.22,1,0.36,1), background 0.4s cubic-bezier(0.22,1,0.36,1), box-shadow 0.4s cubic-bezier(0.22,1,0.36,1)",
+        transform: (hidden && !open) ? "translateY(-100%)" : "translateY(0)",
+        transition: "color 0.4s cubic-bezier(0.22,1,0.36,1), background 0.4s cubic-bezier(0.22,1,0.36,1), box-shadow 0.4s cubic-bezier(0.22,1,0.36,1), transform 0.45s cubic-bezier(0.22,1,0.36,1)",
       }}>
         <Link href="/" className="header__logo" aria-label="Spinelli Prestige home">
           <Image
