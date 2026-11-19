@@ -15,7 +15,7 @@ type Frame = {
 const FRAMES: Frame[] = [
   { src: "/frame1.mp4", image: "/chelsea-bg.jpg", logo: "/chelsea-logo.png" },
   { src: "/frame2.mp4", image: "/altitude-bg.jpg", logo: "/altitude-logo.png" },
-  { src: "/frame3.mp4", label: "Frame 3" },
+  { src: "/frame3.mp4", image: "/canal-bg.jpg", logo: "/canal-logo.png" },
 ];
 
 function VideoFrame({ frame }: { frame: Frame }) {
