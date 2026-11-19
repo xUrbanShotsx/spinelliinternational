@@ -1,7 +1,6 @@
 import Link from "next/link";
 import Reveal from "./components/Reveal";
 import HeroVideo from "./components/HeroVideo";
-import HeroChat from "./components/HeroChat";
 import ScrollStatement from "./components/ScrollStatement";
 import PropertyCard from "./components/PropertyCard";
 import ProcessSection from "./components/ProcessSection";
@@ -9,12 +8,11 @@ import ProcessSection from "./components/ProcessSection";
 export default function HomePage() {
   return (
     <>
-      {/* HERO — video + AI chat */}
+      {/* HERO — video only */}
       <section className="hero dark" style={{ position: "relative", overflow: "hidden" }}>
         <HeroVideo />
         <div aria-hidden="true" style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.45)", zIndex: 1 }} />
         <div className="hero__grid" aria-hidden="true" style={{ position: "absolute", inset: 0, zIndex: 2 }} />
-        <HeroChat />
       </section>
 
       {/* STATEMENT */}
