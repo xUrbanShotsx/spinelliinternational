@@ -45,10 +45,11 @@ function VideoFrame({ frame }: { frame: Frame }) {
           src={frame.image}
           alt=""
           fill
-          sizes="33vw"
+          quality={90}
+          sizes="(max-width: 768px) 100vw, 34vw"
           style={{
             objectFit: "cover",
-            filter: "grayscale(1)",
+            filter: "grayscale(1) contrast(1.4) brightness(0.85)",
             opacity: hovered ? 0 : 1,
             transition: `opacity 0.7s ${EASE}`,
           }}
@@ -99,7 +100,7 @@ function VideoFrame({ frame }: { frame: Frame }) {
             alt="Chelsea Residences by DAMAC"
             width={320}
             height={200}
-            style={{ width: "clamp(180px,22vw,320px)", height: "auto", objectFit: "contain" }}
+            style={{ width: "clamp(260px,32vw,480px)", height: "auto", objectFit: "contain" }}
           />
         </div>
       )}
