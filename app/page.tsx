@@ -22,9 +22,9 @@ export default function HomePage() {
       </section>
 
       {/* PROMO VIDEO */}
-      <section style={{ background: "#d4bb7b", padding: "clamp(48px,7vw,100px)" }}>
-        <Reveal>
-          <div style={{ position: "relative", width: "100%", aspectRatio: "16 / 9", overflow: "hidden" }}>
+      <section style={{ background: "#d4bb7b", height: "100dvh", padding: "clamp(40px,5vw,72px)", display: "flex", flexDirection: "column" }}>
+        <Reveal style={{ flex: 1, minHeight: 0 }}>
+          <div style={{ position: "relative", width: "100%", height: "100%", overflow: "hidden" }}>
             <video
               autoPlay
               muted
