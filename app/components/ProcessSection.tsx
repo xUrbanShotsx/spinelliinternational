@@ -9,13 +9,14 @@ type Frame = {
   src: string;
   image?: string;
   logo?: string;
+  logoInvert?: boolean;
   label?: string;
 };
 
 const FRAMES: Frame[] = [
   { src: "/frame1.mp4", image: "/chelsea-bg.jpg", logo: "/chelsea-logo.png" },
-  { src: "/frame2.mp4", image: "/altitude-bg.jpg", logo: "/altitude-logo.png" },
-  { src: "/frame3.mp4", image: "/canal-bg.jpg", logo: "/canal-logo.png" },
+  { src: "/frame2.mp4", image: "/altitude-bg.jpg", logo: "/altitude-logo.png", logoInvert: true },
+  { src: "/frame3.mp4", image: "/canal-bg.jpg", logo: "/canal-logo.png", logoInvert: true },
 ];
 
 function VideoFrame({ frame }: { frame: Frame }) {
@@ -100,7 +101,7 @@ function VideoFrame({ frame }: { frame: Frame }) {
             alt="Chelsea Residences by DAMAC"
             width={320}
             height={200}
-            style={{ width: "clamp(260px,32vw,480px)", height: "auto", objectFit: "contain" }}
+            style={{ width: "clamp(260px,32vw,480px)", height: "auto", objectFit: "contain", filter: frame.logoInvert ? "brightness(0) invert(1)" : "none" }}
           />
         </div>
       )}
