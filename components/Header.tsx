@@ -30,7 +30,7 @@ export default function Header() {
 
   const isProjects = pathname.startsWith("/projects");
   const showWhiteBg = isProjects && scrolled;
-  const headerColor = showWhiteBg ? "#0a0a08" : scrolled ? "#d4bb7b" : "#fff";
+  const headerColor = showWhiteBg ? "#0a0a08" : (isProjects || scrolled) ? "#d4bb7b" : "#fff";
 
   return (
     <>
