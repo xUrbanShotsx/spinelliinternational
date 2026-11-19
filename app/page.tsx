@@ -1,4 +1,3 @@
-import Link from "next/link";
 import Reveal from "./components/Reveal";
 import HeroVideo from "./components/HeroVideo";
 import ScrollStatement from "./components/ScrollStatement";
@@ -45,29 +44,6 @@ export default function HomePage() {
       {/* WHY DUBAI */}
       <WhyDubaiSection />
 
-      {/* MARQUEE */}
-      <section className="marquee dark" aria-hidden="true">
-        <div className="marquee__track">
-          {["International", "Global Markets", "Cross-Border", "Off-Market", "International", "Global Markets", "Cross-Border", "Off-Market"].map((w, i) => (
-            <span key={i}>{w}<i>✱</i></span>
-          ))}
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section className="section cta light">
-        <div className="wrap">
-          <Reveal as="p" className="eyebrow">Work with us globally</Reveal>
-          <Reveal as="h2" className="cta__title">
-            Selling to<br />the world?
-          </Reveal>
-          <Reveal>
-            <Link href="/contact" className="btn btn--dark">
-              Start a conversation <span aria-hidden="true">→</span>
-            </Link>
-          </Reveal>
-        </div>
-      </section>
     </>
   );
 }
