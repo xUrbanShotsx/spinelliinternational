@@ -1,16 +1,23 @@
 "use client";
 
 import { useRef, useState } from "react";
+import Image from "next/image";
 
 const EASE = "cubic-bezier(0.22,1,0.36,1)";
 
-const FRAMES = [
-  { src: "/frame1.mp4", label: "Frame 1" },
+type Frame = {
+  src: string;
+  logo?: string;
+  label?: string;
+};
+
+const FRAMES: Frame[] = [
+  { src: "/frame1.mp4", logo: "/chelsea-logo.png" },
   { src: "/frame2.mp4", label: "Frame 2" },
   { src: "/frame3.mp4", label: "Frame 3" },
 ];
 
-function VideoFrame({ src, label, delay }: { src: string; label: string; delay: number }) {
+function VideoFrame({ frame }: { frame: Frame }) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [hovered, setHovered] = useState(false);
 
@@ -29,12 +36,7 @@ function VideoFrame({ src, label, delay }: { src: string; label: string; delay: 
     <div
       onMouseEnter={onEnter}
       onMouseLeave={onLeave}
-      style={{
-        position: "relative",
-        height: "100%",
-        overflow: "hidden",
-        cursor: "pointer",
-      }}
+      style={{ position: "relative", height: "100%", overflow: "hidden", cursor: "pointer" }}
     >
       {/* Video */}
       <video
@@ -50,10 +52,10 @@ function VideoFrame({ src, label, delay }: { src: string; label: string; delay: 
           transition: `filter 0.7s ${EASE}`,
         }}
       >
-        <source src={src} type="video/mp4" />
+        <source src={frame.src} type="video/mp4" />
       </video>
 
-      {/* Dark overlay — fades out on hover */}
+      {/* Dark overlay */}
       <div style={{
         position: "absolute", inset: 0,
         background: "rgba(0,0,0,0.25)",
@@ -62,26 +64,49 @@ function VideoFrame({ src, label, delay }: { src: string; label: string; delay: 
         pointerEvents: "none",
       }} />
 
-      {/* Label — fades out on hover */}
-      <div style={{
-        position: "absolute", inset: 0,
-        display: "flex", alignItems: "flex-end",
-        padding: "clamp(16px,2vw,28px)",
-        opacity: hovered ? 0 : 1,
-        transform: hovered ? "translateY(6px)" : "translateY(0)",
-        transition: `opacity 0.5s ${EASE} ${delay}ms, transform 0.5s ${EASE} ${delay}ms`,
-        pointerEvents: "none",
-      }}>
-        <p style={{
-          color: "#fff",
-          fontFamily: "var(--font-mono), monospace",
-          fontSize: "clamp(10px,1vw,13px)",
-          letterSpacing: "0.12em",
-          textTransform: "uppercase",
+      {/* Logo (centred) */}
+      {frame.logo && (
+        <div style={{
+          position: "absolute", inset: 0,
+          display: "flex", alignItems: "center", justifyContent: "center",
+          opacity: hovered ? 0 : 1,
+          transform: hovered ? "scale(0.95)" : "scale(1)",
+          transition: `opacity 0.5s ${EASE}, transform 0.5s ${EASE}`,
+          pointerEvents: "none",
+          padding: "clamp(24px,4vw,48px)",
         }}>
-          {label}
-        </p>
-      </div>
+          <Image
+            src={frame.logo}
+            alt="Chelsea Residences by DAMAC"
+            width={260}
+            height={160}
+            style={{ width: "clamp(140px,16vw,260px)", height: "auto", objectFit: "contain" }}
+          />
+        </div>
+      )}
+
+      {/* Text label (bottom-left) */}
+      {frame.label && (
+        <div style={{
+          position: "absolute", inset: 0,
+          display: "flex", alignItems: "flex-end",
+          padding: "clamp(16px,2vw,28px)",
+          opacity: hovered ? 0 : 1,
+          transform: hovered ? "translateY(6px)" : "translateY(0)",
+          transition: `opacity 0.5s ${EASE}, transform 0.5s ${EASE}`,
+          pointerEvents: "none",
+        }}>
+          <p style={{
+            color: "#fff",
+            fontFamily: "var(--font-mono), monospace",
+            fontSize: "clamp(10px,1vw,13px)",
+            letterSpacing: "0.12em",
+            textTransform: "uppercase",
+          }}>
+            {frame.label}
+          </p>
+        </div>
+      )}
     </div>
   );
 }
@@ -102,8 +127,8 @@ export default function ProcessSection() {
         gridTemplateColumns: "repeat(3, 1fr)",
         gap: "clamp(40px,5vw,72px)",
       }}>
-        {FRAMES.map((f, i) => (
-          <VideoFrame key={f.src} src={f.src} label={f.label} delay={i * 60} />
+        {FRAMES.map((f) => (
+          <VideoFrame key={f.src} frame={f} />
         ))}
       </div>
     </section>
