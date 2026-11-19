@@ -16,16 +16,23 @@ export default function ProjectsPage() {
       {/* STICKY VIDEO PANELS */}
       {VIDEOS.map((v, i) => (
         <div key={v.src} style={{ height: "100dvh" }}>
-          <div style={{ position: "sticky", top: 0, height: "100dvh", overflow: "hidden" }}>
-            <video
-              autoPlay
-              muted
-              loop
-              playsInline
-              style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }}
-            >
-              <source src={v.src} type="video/mp4" />
-            </video>
+          <div style={{
+            position: "sticky", top: 0, height: "100dvh",
+            background: "#0a0a08",
+            padding: "clamp(40px,5vw,72px)",
+            display: "flex", flexDirection: "column",
+          }}>
+            <div style={{ flex: 1, minHeight: 0, position: "relative", overflow: "hidden" }}>
+              <video
+                autoPlay
+                muted
+                loop
+                playsInline
+                style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }}
+              >
+                <source src={v.src} type="video/mp4" />
+              </video>
+            </div>
           </div>
         </div>
       ))}
