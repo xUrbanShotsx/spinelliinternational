@@ -74,14 +74,14 @@ export default function WhyDubaiSection() {
       <h2 style={{
         textAlign: "center",
         fontFamily: "var(--font-serif, serif)",
-        fontSize: "clamp(13px,1.1vw,16px)",
-        fontWeight: 400,
-        letterSpacing: "0.22em",
+        fontSize: "clamp(36px,5vw,80px)",
+        fontWeight: 700,
+        letterSpacing: "-0.02em",
         textTransform: "uppercase",
         color: "#0a0a08",
         marginBottom: "clamp(40px,5vw,72px)",
       }}>
-        Why Dubai?
+        Why Dubai
       </h2>
 
       {/* Scroll track */}
