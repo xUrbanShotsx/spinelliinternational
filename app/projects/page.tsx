@@ -18,8 +18,9 @@ export default function ProjectsPage() {
         <div key={v.src} style={{ height: "100dvh" }}>
           <div style={{
             position: "sticky", top: 0, height: "100dvh",
-            background: "#0a0a08",
+            background: "#fff",
             padding: "clamp(40px,5vw,72px)",
+            paddingTop: i === 0 ? "clamp(110px,13vw,160px)" : "clamp(40px,5vw,72px)",
             display: "flex", flexDirection: "column",
           }}>
             <div style={{ flex: 1, minHeight: 0, position: "relative", overflow: "hidden" }}>
