@@ -16,12 +16,12 @@ const COLUMNS = [
   {
     heading: "Projects",
     links: [
-      { label: "Sobha Hartland II", href: "/projects/f1" },
-      { label: "One Za'abeel Residences", href: "/projects/f2" },
-      { label: "Emaar Beachfront", href: "/projects/f3" },
-      { label: "DAMAC Islands", href: "/projects/f4" },
-      { label: "Binghatti Skyrise", href: "/projects/f5" },
-      { label: "Palm Jebel Ali Villas", href: "/projects/f6" },
+      { label: "Chelsea Residences", href: "/projects/chelsea" },
+      { label: "Altitude by DAMAC", href: "/projects/altitude" },
+      { label: "Canal Heights II", href: "/projects/canal-heights" },
+      { label: "DAMAC Islands", href: "/projects/damac-islands" },
+      { label: "Coral Reef", href: "/projects/coral-reef" },
+      { label: "Couture by Cavalli", href: "/projects/couture-cavalli" },
     ],
   },
   {

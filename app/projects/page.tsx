@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import { FAKE_LISTINGS } from "./data";
+import { PROJECTS } from "./data";
 
 export const metadata: Metadata = { title: "Projects" };
 
@@ -48,7 +48,7 @@ export default function ProjectsPage() {
           gridTemplateColumns: "repeat(auto-fill, minmax(min(100%,420px), 1fr))",
           gap: "clamp(16px,2vw,28px)",
         }}>
-          {FAKE_LISTINGS.map((p) => (
+          {PROJECTS.map((p) => (
             <Link
               key={p.id}
               href={`/projects/${p.id}`}
@@ -101,7 +101,7 @@ export default function ProjectsPage() {
                     letterSpacing: "0.12em",
                     textTransform: "uppercase",
                   }}>
-                    {p.suburb}
+                    {p.suburb} · {p.price}
                   </p>
                 </div>
               </div>

@@ -2,44 +2,37 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { FAKE_LISTINGS, getListingById } from "../data";
+import { PROJECTS, getProjectById } from "../data";
 import Reveal from "../../components/Reveal";
 import EnquiryForm from "./EnquiryForm";
 import PhotoGallery from "./PhotoGallery";
-import ActionLinks from "./ActionLinks";
 
 export async function generateStaticParams() {
-  return FAKE_LISTINGS.map((p) => ({ id: p.id }));
+  return PROJECTS.map((p) => ({ id: p.id }));
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
   const { id } = await params;
-  const p = getListingById(id);
-  if (!p) return { title: "Property Not Found" };
+  const p = getProjectById(id);
+  if (!p) return { title: "Project Not Found" };
   return {
-    title: `${p.address}, ${p.suburb} — Spinelli International`,
+    title: `${p.title}, ${p.suburb} — Spinelli International`,
     description: p.description,
   };
 }
 
 const EASE = "cubic-bezier(0.22,1,0.36,1)";
 
-export default async function PropertyPage({ params }: { params: Promise<{ id: string }> }) {
+export default async function ProjectPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
-  const p = getListingById(id);
+  const p = getProjectById(id);
   if (!p) notFound();
 
-  const specs = [
-    p.beds  != null             ? `${p.beds} Bed`   : null,
-    p.baths != null             ? `${p.baths} Bath`  : null,
-    p.cars  != null && p.cars > 0 ? `${p.cars} Car`  : null,
-  ].filter(Boolean) as string[];
-
-  const paragraphs = p.longDescription?.split("\n\n") ?? [p.description];
+  const paragraphs = p.longDescription.split("\n\n");
 
   return (
     <>
-      {/* ── HERO — full viewport, clean image only ───────────────── */}
+      {/* HERO */}
       <section style={{
         position: "relative",
         height: "100svh",
@@ -49,19 +42,17 @@ export default async function PropertyPage({ params }: { params: Promise<{ id: s
       }}>
         <Image
           src={p.image}
-          alt={p.address}
+          alt={p.title}
           fill
           priority
           sizes="100vw"
           style={{ objectFit: "cover", opacity: 0.88 }}
         />
-        {/* subtle top fade for header legibility */}
         <div style={{
           position: "absolute", inset: 0,
-          background: "linear-gradient(to bottom, rgba(10,10,8,0.3) 0%, transparent 30%)",
+          background: "linear-gradient(to bottom, rgba(10,10,8,0.3) 0%, transparent 30%, rgba(10,10,8,0.5) 100%)",
           pointerEvents: "none",
         }} />
-
         {/* back link */}
         <div style={{ position: "absolute", top: 32, left: "var(--gutter)" }}>
           <Link href="/projects" style={{
@@ -69,126 +60,79 @@ export default async function PropertyPage({ params }: { params: Promise<{ id: s
             fontSize: 10, letterSpacing: "0.14em", textTransform: "uppercase",
             color: "rgba(255,255,255,0.65)",
             display: "inline-flex", alignItems: "center", gap: 8,
+            textDecoration: "none",
           }}>
             ← All projects
           </Link>
         </div>
-      </section>
-
-      {/* ── INFO PANEL — address + specs left, actions + agent right ── */}
-      <section style={{ background: "#fff", borderBottom: "1px solid rgba(26,18,8,0.08)" }}>
-        <div className="wrap property-info-grid" style={{
-          display: "grid",
-          gridTemplateColumns: "1fr clamp(300px,36vw,520px)",
-          gap: 0,
-          alignItems: "start",
+        {/* hero title overlay */}
+        <div style={{
+          position: "absolute", bottom: "clamp(48px,6vw,88px)", left: "var(--gutter)", right: "var(--gutter)",
         }}>
-
-          {/* ── LEFT: breadcrumb · address · specs · method · description ── */}
-          <div style={{
-            padding: "clamp(48px,6vw,96px) clamp(32px,4vw,72px) clamp(48px,6vw,96px) 0",
-            borderRight: "1px solid rgba(26,18,8,0.08)",
+          <p style={{
+            fontFamily: "var(--font-mono), monospace",
+            fontSize: 10, letterSpacing: "0.18em", textTransform: "uppercase",
+            color: "rgba(255,255,255,0.55)", marginBottom: 12,
           }}>
-            {/* breadcrumb */}
-            <Reveal>
-              <p style={{
+            {p.developer}
+          </p>
+          <h1 style={{
+            fontSize: "clamp(36px,6vw,88px)",
+            fontWeight: 700, letterSpacing: "-0.04em", lineHeight: 0.95,
+            color: "#fff", marginBottom: 20,
+          }}>
+            {p.title}
+          </h1>
+          <div style={{ display: "flex", gap: 32, flexWrap: "wrap" }}>
+            {[
+              p.location,
+              p.price,
+              `Handover ${p.handover}`,
+            ].map((item) => (
+              <span key={item} style={{
                 fontFamily: "var(--font-mono), monospace",
-                fontSize: 9, letterSpacing: "0.18em", textTransform: "uppercase",
-                color: "rgba(26,18,8,0.35)", marginBottom: 28,
-                display: "flex", gap: 10, alignItems: "center",
+                fontSize: 10, letterSpacing: "0.12em", textTransform: "uppercase",
+                color: "rgba(255,255,255,0.65)",
               }}>
-                <Link href="/projects" style={{ color: "inherit" }}>Projects</Link>
-                <span style={{ opacity: 0.4 }}>›</span>
-                <span>{p.suburb}</span>
-              </p>
-            </Reveal>
-
-            {/* address heading */}
-            <Reveal delay={30}>
-              <h1 style={{
-                fontFamily: "var(--font-sans), sans-serif",
-                fontSize: "clamp(28px,4vw,56px)",
-                fontWeight: 700, letterSpacing: "-0.04em", lineHeight: 1.05,
-                color: "#1a1208", marginBottom: 28,
-              }}>
-                {p.address}<br />
-                <span style={{ color: "rgba(26,18,8,0.45)", fontWeight: 500 }}>
-                  {p.suburb.toUpperCase()}&nbsp;NSW
-                </span>
-              </h1>
-            </Reveal>
-
-            {/* inline specs */}
-            {specs.length > 0 && (
-              <Reveal delay={50}>
-                <div style={{
-                  display: "flex", gap: "clamp(20px,3vw,40px)",
-                  marginBottom: 20,
-                }}>
-                  {specs.map((s) => (
-                    <span key={s} style={{
-                      fontFamily: "var(--font-mono), monospace",
-                      fontSize: 11, letterSpacing: "0.14em", textTransform: "uppercase",
-                      color: "#1a1208",
-                    }}>{s}</span>
-                  ))}
-                </div>
-              </Reveal>
-            )}
-
-            {/* sale method / price */}
-            <Reveal delay={60}>
-              <p style={{
-                fontFamily: "var(--font-mono), monospace",
-                fontSize: 11, letterSpacing: "0.1em",
-                color: "rgba(26,18,8,0.5)",
-                marginBottom: 48,
-              }}>
-                <span style={{ color: "#1a1208", fontWeight: 600 }}>For Sale</span>
-                {p.price !== "Contact Agent" ? ` via ${p.price}` : " — Contact Agent"}
-              </p>
-            </Reveal>
-
-            {/* open home */}
-            {p.openHome && (
-              <Reveal delay={120}>
-                <div style={{
-                  marginTop: 36,
-                  display: "inline-flex", alignItems: "center", gap: 16,
-                  padding: "14px 20px",
-                  border: "1px solid rgba(212,187,123,0.5)",
-                  background: "rgba(212,187,123,0.06)",
-                }}>
-                  <span style={{
-                    fontFamily: "var(--font-mono), monospace",
-                    fontSize: 9, letterSpacing: "0.14em", textTransform: "uppercase",
-                    color: "rgba(26,18,8,0.4)",
-                  }}>Open home</span>
-                  <span style={{
-                    fontFamily: "var(--font-mono), monospace",
-                    fontSize: 11, letterSpacing: "0.08em",
-                    color: "#1a1208",
-                  }}>{p.openHome}</span>
-                </div>
-              </Reveal>
-            )}
-          </div>
-
-          {/* ── RIGHT: actions + agent ─────────────────────────────── */}
-          <div style={{ padding: "clamp(48px,6vw,96px) 0 clamp(48px,6vw,96px) clamp(32px,4vw,72px)" }}>
-
-            {/* action links */}
-            <Reveal>
-              <ActionLinks />
-            </Reveal>
-
+                {item}
+              </span>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* ── ABOUT THE PROPERTY ───────────────────────────────────── */}
+      {/* INFO STRIP */}
+      <section style={{
+        background: "#fff",
+        borderBottom: "1px solid rgba(10,10,8,0.08)",
+        padding: "clamp(28px,3.5vw,48px) var(--gutter)",
+        display: "flex",
+        gap: "clamp(32px,4vw,64px)",
+        flexWrap: "wrap",
+        alignItems: "center",
+      }}>
+        {[
+          { label: "Developer", value: p.developer },
+          { label: "Location", value: p.suburb },
+          { label: "Units", value: p.bedrooms },
+          { label: "Starting Price", value: p.price },
+          { label: "Payment Plan", value: p.paymentPlan ?? "On request" },
+          { label: "Handover", value: p.handover },
+        ].map((s) => (
+          <div key={s.label}>
+            <p style={{
+              fontFamily: "var(--font-mono), monospace",
+              fontSize: 9, letterSpacing: "0.18em", textTransform: "uppercase",
+              color: "rgba(10,10,8,0.35)", marginBottom: 6,
+            }}>{s.label}</p>
+            <p style={{ fontSize: 14, fontWeight: 600, color: "#0a0a08", letterSpacing: "-0.01em" }}>{s.value}</p>
+          </div>
+        ))}
+      </section>
+
+      {/* DESCRIPTION */}
       <section style={{ background: "#fff", padding: "clamp(80px,10vw,160px) 0" }}>
-        <div className="wrap property-desc-grid" style={{
+        <div className="wrap" style={{
           display: "grid",
           gridTemplateColumns: "1fr clamp(260px,32vw,480px)",
           gap: "clamp(48px,6vw,96px)",
@@ -199,15 +143,15 @@ export default async function PropertyPage({ params }: { params: Promise<{ id: s
               <p style={{
                 fontFamily: "var(--font-mono), monospace",
                 fontSize: 9, letterSpacing: "0.18em", textTransform: "uppercase",
-                color: "rgba(26,18,8,0.35)", marginBottom: 40,
-              }}>About the property</p>
+                color: "rgba(10,10,8,0.35)", marginBottom: 40,
+              }}>About this project</p>
             </Reveal>
             <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
               {paragraphs.map((para, i) => (
                 <Reveal key={i} delay={i * 30}>
                   <p style={{
                     fontSize: "clamp(15px,1.5vw,18px)",
-                    lineHeight: 1.75, color: "#1a1208",
+                    lineHeight: 1.75, color: "#0a0a08",
                     fontWeight: i === 0 ? 500 : 400,
                     opacity: i === 0 ? 1 : 0.78,
                   }}>{para}</p>
@@ -215,8 +159,7 @@ export default async function PropertyPage({ params }: { params: Promise<{ id: s
               ))}
             </div>
           </div>
-
-          {p.photos && p.photos[1] && (
+          {p.photos[1] && (
             <Reveal delay={80}>
               <div style={{
                 position: "sticky", top: 120,
@@ -224,7 +167,7 @@ export default async function PropertyPage({ params }: { params: Promise<{ id: s
               }}>
                 <Image
                   src={p.photos[1]}
-                  alt={p.address}
+                  alt={p.title}
                   fill
                   sizes="(max-width: 768px) 100vw, 32vw"
                   style={{ objectFit: "cover" }}
@@ -235,25 +178,59 @@ export default async function PropertyPage({ params }: { params: Promise<{ id: s
         </div>
       </section>
 
-      {/* ── PHOTO GALLERY ────────────────────────────────────────── */}
-      {p.photos && p.photos.length > 0 && (
+      {/* FEATURES */}
+      <section style={{ background: "#f8f7f4", padding: "clamp(64px,8vw,112px) 0" }}>
+        <div className="wrap">
+          <Reveal>
+            <p style={{
+              fontFamily: "var(--font-mono), monospace",
+              fontSize: 9, letterSpacing: "0.18em", textTransform: "uppercase",
+              color: "rgba(10,10,8,0.35)", marginBottom: 48,
+            }}>Key features</p>
+          </Reveal>
+          <div style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fill, minmax(min(100%,280px), 1fr))",
+            gap: "clamp(16px,2vw,24px)",
+          }}>
+            {p.features.map((f, i) => (
+              <Reveal key={f} delay={i * 20}>
+                <div style={{
+                  padding: "clamp(20px,2.5vw,32px)",
+                  background: "#fff",
+                  borderLeft: "2px solid #d4bb7b",
+                }}>
+                  <p style={{ fontSize: 14, lineHeight: 1.5, color: "#0a0a08" }}>{f}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* GALLERY */}
+      {p.photos.length > 0 && (
         <section style={{ background: "#fff", padding: "clamp(60px,8vw,120px) 0" }}>
           <div className="wrap">
             <Reveal>
               <p style={{
                 fontFamily: "var(--font-mono), monospace",
                 fontSize: 9, letterSpacing: "0.18em", textTransform: "uppercase",
-                color: "rgba(26,18,8,0.35)", marginBottom: 40,
+                color: "rgba(10,10,8,0.35)", marginBottom: 40,
               }}>Gallery</p>
             </Reveal>
-            <PhotoGallery photos={[p.image, ...p.photos]} address={p.address} />
+            <PhotoGallery photos={p.photos} address={p.title} />
           </div>
         </section>
       )}
 
-      {/* ── ENQUIRY ──────────────────────────────────────────────── */}
-      <section id="enquire" style={{ background: "#fff", padding: "clamp(80px,10vw,140px) 0", borderTop: "1px solid rgba(26,18,8,0.08)" }}>
-        <div className="wrap property-enquiry-grid" style={{
+      {/* ENQUIRY */}
+      <section id="enquire" style={{
+        background: "#fff",
+        padding: "clamp(80px,10vw,140px) 0",
+        borderTop: "1px solid rgba(10,10,8,0.08)",
+      }}>
+        <div className="wrap" style={{
           display: "grid",
           gridTemplateColumns: "1fr 1fr",
           gap: "clamp(48px,8vw,120px)",
@@ -264,29 +241,30 @@ export default async function PropertyPage({ params }: { params: Promise<{ id: s
               <p style={{
                 fontFamily: "var(--font-mono), monospace",
                 fontSize: 9, letterSpacing: "0.18em", textTransform: "uppercase",
-                color: "rgba(26,18,8,0.35)", marginBottom: 32,
+                color: "rgba(10,10,8,0.35)", marginBottom: 32,
               }}>Enquire</p>
             </Reveal>
             <Reveal delay={40}>
               <h2 style={{
                 fontSize: "clamp(36px,6vw,80px)",
                 fontWeight: 700, letterSpacing: "-0.04em", lineHeight: 0.92,
-                color: "#1a1208", marginBottom: 32,
+                color: "#0a0a08", marginBottom: 32,
               }}>
-                Interested<br />in this<br />property?
+                Interested<br />in this<br />project?
               </h2>
             </Reveal>
             <Reveal delay={80}>
               <p style={{
                 fontSize: "clamp(14px,1.4vw,17px)", lineHeight: 1.7,
-                color: "rgba(26,18,8,0.5)", maxWidth: 380,
+                color: "rgba(10,10,8,0.5)", maxWidth: 380,
               }}>
                 Send us a message and we&apos;ll be in touch within the hour.
+                We can arrange a full project presentation, floor plan review and payment plan breakdown.
               </p>
             </Reveal>
           </div>
           <Reveal delay={60}>
-            <EnquiryForm address={p.address} suburb={p.suburb} />
+            <EnquiryForm address={p.title} suburb={p.suburb} />
           </Reveal>
         </div>
       </section>
